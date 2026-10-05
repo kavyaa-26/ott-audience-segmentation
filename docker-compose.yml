@@ -1,0 +1,44 @@
+services:
+  trainer:
+    build:
+      context: ./trainer
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/app/data
+      - models_data:/app/models
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - models_data:/app/models:ro
+    depends_on:
+      trainer:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request, sys; sys.exit(0 if urllib.request.urlopen('http://localhost:8000/health').getcode() == 200 else 1)"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+      start_period: 2s
+
+  evaluator:
+    build:
+      context: ./evaluator
+      dockerfile: Dockerfile
+    environment:
+      - API_URL=http://api:8000
+      - METRICS_PATH=/app/metrics/metrics.json
+      - MODELS_DIR=/app/models
+    volumes:
+      - models_data:/app/models:ro
+      - .:/app/metrics
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  models_data:

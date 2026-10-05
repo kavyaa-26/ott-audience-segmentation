@@ -1,0 +1,31 @@
+{
+  "clustering": {
+    "num_clusters": 6,
+    "silhouette_score": 0.3012,
+    "inertia": 3791.71,
+    "cluster_sizes": {
+      "0": 45,
+      "1": 168,
+      "2": 65,
+      "3": 118,
+      "4": 120,
+      "5": 84
+    }
+  },
+  "api": {
+    "health_check": true,
+    "valid_requests_passed": true
+  },
+  "robustness": {
+    "unknown_genre": true,
+    "empty_genres": true,
+    "zero_watch_time": true,
+    "large_watch_time": true,
+    "missing_field": true,
+    "invalid_numeric_type": true,
+    "negative_value": true
+  },
+  "reproducibility": {
+    "fixed_seed": true
+  }
+}

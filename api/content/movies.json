@@ -1,0 +1,158 @@
+[
+  {
+    "title": "The Dark Knight",
+    "genre": ["Action", "Thriller"],
+    "duration_mins": 152,
+    "popularity": 0.95
+  },
+  {
+    "title": "Inception",
+    "genre": ["Sci-Fi", "Action", "Thriller"],
+    "duration_mins": 148,
+    "popularity": 0.93
+  },
+  {
+    "title": "Mad Max: Fury Road",
+    "genre": ["Action", "Sci-Fi"],
+    "duration_mins": 120,
+    "popularity": 0.88
+  },
+  {
+    "title": "John Wick",
+    "genre": ["Action", "Thriller"],
+    "duration_mins": 101,
+    "popularity": 0.87
+  },
+  {
+    "title": "Gladiator",
+    "genre": ["Action", "Drama"],
+    "duration_mins": 155,
+    "popularity": 0.90
+  },
+  {
+    "title": "Knives Out",
+    "genre": ["Mystery", "Comedy"],
+    "duration_mins": 130,
+    "popularity": 0.89
+  },
+  {
+    "title": "Se7en",
+    "genre": ["Thriller", "Mystery"],
+    "duration_mins": 127,
+    "popularity": 0.91
+  },
+  {
+    "title": "Zodiac",
+    "genre": ["Mystery", "Drama", "Thriller"],
+    "duration_mins": 157,
+    "popularity": 0.85
+  },
+  {
+    "title": "Gone Girl",
+    "genre": ["Thriller", "Drama", "Mystery"],
+    "duration_mins": 149,
+    "popularity": 0.86
+  },
+  {
+    "title": "Prisoners",
+    "genre": ["Thriller", "Mystery", "Drama"],
+    "duration_mins": 153,
+    "popularity": 0.84
+  },
+  {
+    "title": "The Grand Budapest Hotel",
+    "genre": ["Comedy", "Drama"],
+    "duration_mins": 99,
+    "popularity": 0.86
+  },
+  {
+    "title": "Superbad",
+    "genre": ["Comedy"],
+    "duration_mins": 113,
+    "popularity": 0.82
+  },
+  {
+    "title": "Paddington 2",
+    "genre": ["Comedy", "Family", "Animation"],
+    "duration_mins": 103,
+    "popularity": 0.89
+  },
+  {
+    "title": "Coco",
+    "genre": ["Animation", "Family", "Drama"],
+    "duration_mins": 105,
+    "popularity": 0.92
+  },
+  {
+    "title": "Toy Story",
+    "genre": ["Animation", "Family", "Comedy"],
+    "duration_mins": 81,
+    "popularity": 0.90
+  },
+  {
+    "title": "Spirited Away",
+    "genre": ["Animation", "Family", "Fantasy"],
+    "duration_mins": 125,
+    "popularity": 0.94
+  },
+  {
+    "title": "Finding Nemo",
+    "genre": ["Animation", "Family", "Comedy"],
+    "duration_mins": 100,
+    "popularity": 0.88
+  },
+  {
+    "title": "The Shawshank Redemption",
+    "genre": ["Drama"],
+    "duration_mins": 142,
+    "popularity": 0.96
+  },
+  {
+    "title": "Whiplash",
+    "genre": ["Drama"],
+    "duration_mins": 106,
+    "popularity": 0.89
+  },
+  {
+    "title": "Manchester by the Sea",
+    "genre": ["Drama"],
+    "duration_mins": 137,
+    "popularity": 0.81
+  },
+  {
+    "title": "La La Land",
+    "genre": ["Romance", "Drama", "Comedy"],
+    "duration_mins": 128,
+    "popularity": 0.90
+  },
+  {
+    "title": "Before Sunrise",
+    "genre": ["Romance", "Drama"],
+    "duration_mins": 101,
+    "popularity": 0.84
+  },
+  {
+    "title": "Pride & Prejudice",
+    "genre": ["Romance", "Drama"],
+    "duration_mins": 129,
+    "popularity": 0.85
+  },
+  {
+    "title": "Interstellar",
+    "genre": ["Sci-Fi", "Drama"],
+    "duration_mins": 169,
+    "popularity": 0.94
+  },
+  {
+    "title": "Blade Runner 2049",
+    "genre": ["Sci-Fi", "Mystery", "Drama"],
+    "duration_mins": 164,
+    "popularity": 0.87
+  },
+  {
+    "title": "Arrival",
+    "genre": ["Sci-Fi", "Drama", "Mystery"],
+    "duration_mins": 116,
+    "popularity": 0.88
+  }
+]

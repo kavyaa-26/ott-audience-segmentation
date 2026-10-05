@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTT Audience Intelligence &amp; Personalization Service</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <img src="/favicon.svg" alt="Service Logo" class="brand-logo" width="28" height="28">
+        <span class="brand-title">OTT Audience Intelligence</span>
+      </div>
+      <nav class="nav-tabs" aria-label="Main Navigation">
+        <button type="button" class="nav-tab active" data-tab="analyze" id="tab-analyze" aria-controls="view-analyze" aria-selected="true">Analyze Viewer</button>
+        <button type="button" class="nav-tab" data-tab="segments" id="tab-segments" aria-controls="view-segments" aria-selected="false">Audience Segments</button>
+        <button type="button" class="nav-tab" data-tab="status" id="tab-status" aria-controls="view-status" aria-selected="false">System Status</button>
+      </nav>
+      <div class="header-status">
+        <span class="status-indicator-dot" id="system-status-dot"></span>
+        <span class="status-indicator-text" id="system-status-text">Checking API...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content" id="main-content">
+    <!-- View 1: Analyze Viewer (Default) -->
+    <div class="view-panel active" id="view-analyze" role="tabpanel" aria-labelledby="tab-analyze">
+      <!-- Section 18: Factual Hero Section -->
+      <section class="hero-section">
+        <h1 class="hero-headline">Understand viewer behavior.<br>Deliver better content recommendations.</h1>
+        <p class="hero-subtext">
+          Analyze viewing patterns, identify audience segments, and personalize content from a single viewer profile.
+        </p>
+      </section>
+
+      <!-- Alert Notification Banner -->
+      <div id="error-banner" class="alert alert-error hidden" role="alert" aria-live="assertive">
+        <span id="error-banner-message"></span>
+        <button type="button" class="alert-close" id="error-banner-close" aria-label="Dismiss error">&times;</button>
+      </div>
+
+      <div class="analyzer-layout">
+        <!-- Input Column: Option A and Option B -->
+        <div class="analyzer-form-card">
+          <!-- Option A: Seeded Demo Users -->
+          <section class="demo-users-section" aria-labelledby="demo-users-heading">
+            <h2 id="demo-users-heading" class="section-title">Option A: Seeded Demo Profiles</h2>
+            <p class="section-desc">Select a calibrated demonstration profile to populate the input parameters.</p>
+            <div class="demo-buttons-grid" id="demo-buttons-container">
+              <!-- Seeded demo buttons injected by JavaScript -->
+            </div>
+          </section>
+
+          <hr class="divider">
+
+          <!-- Option B: Manual Profile Entry -->
+          <section class="custom-profile-section" aria-labelledby="custom-profile-heading">
+            <h2 id="custom-profile-heading" class="section-title">Option B: Viewer Profile Parameters</h2>
+            <p class="section-desc">Enter numeric behavioral metrics and select preferred genres for analysis.</p>
+
+            <form id="viewer-form" novalidate>
+              <div class="form-group">
+                <label for="input-user-id" class="form-label">User ID <span class="required-mark">*</span></label>
+                <input type="text" id="input-user-id" name="user_id" class="form-control" placeholder="e.g. DEMO-ACTION-001" required>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="input-watch-time" class="form-label">Watch Time (hours) <span class="required-mark">*</span></label>
+                  <input type="number" id="input-watch-time" name="watch_time_hours" class="form-control" placeholder="0" step="0.5" min="0" required>
+                </div>
+                <div class="form-group">
+                  <label for="input-avg-session" class="form-label">Average Session (mins) <span class="required-mark">*</span></label>
+                  <input type="number" id="input-avg-session" name="avg_session_mins" class="form-control" placeholder="0" step="1" min="0" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="input-visits-week" class="form-label">Visits per Week <span class="required-mark">*</span></label>
+                <input type="number" id="input-visits-week" name="visits_per_week" class="form-control" placeholder="0" step="1" min="0" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" id="genres-label">Top Genres <span class="required-mark">*</span></label>
+                <div class="genres-chips-selector" role="group" aria-labelledby="genres-label">
+                  <button type="button" class="genre-chip" data-genre="Action">Action</button>
+                  <button type="button" class="genre-chip" data-genre="Thriller">Thriller</button>
+                  <button type="button" class="genre-chip" data-genre="Sci-Fi">Sci-Fi</button>
+                  <button type="button" class="genre-chip" data-genre="Drama">Drama</button>
+                  <button type="button" class="genre-chip" data-genre="Romance">Romance</button>
+                  <button type="button" class="genre-chip" data-genre="Comedy">Comedy</button>
+                  <button type="button" class="genre-chip" data-genre="Family">Family</button>
+                  <button type="button" class="genre-chip" data-genre="Animation">Animation</button>
+                  <button type="button" class="genre-chip" data-genre="Mystery">Mystery</button>
+                </div>
+                <div class="selected-genres-preview" id="selected-genres-display">Selected: None</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="btn-submit-analyze">
+                <span class="btn-text">Analyze Viewer</span>
+                <span class="btn-spinner hidden" id="submit-spinner" aria-hidden="true"></span>
+              </button>
+            </form>
+          </section>
+        </div>
+
+        <!-- Result Column: Results View -->
+        <div class="analyzer-results-card" id="results-panel">
+          <div class="empty-state" id="results-empty-state">
+            <div class="empty-state-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5">
+                <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3 class="empty-state-title">No Analysis Executed</h3>
+            <p class="empty-state-desc">Select a seed profile or enter viewer metrics and click "Analyze Viewer" to obtain real segment classification and catalog recommendations.</p>
+          </div>
+
+          <div class="results-content hidden" id="results-display">
+            <!-- Header Summary -->
+            <div class="results-header">
+              <div class="segment-badge-wrap">
+                <span class="badge-label">Predicted Segment</span>
+                <h3 class="segment-name-display" id="res-segment-name">—</h3>
+                <span class="segment-meta-tag" id="res-segment-id">Cluster ID: —</span>
+              </div>
+              <div class="centroid-stat">
+                <span class="stat-caption">Distance to Centroid</span>
+                <span class="stat-value" id="res-centroid-dist">—</span>
+              </div>
+            </div>
+
+            <!-- Profile Overview -->
+            <div class="profile-summary-box">
+              <h4 class="summary-box-title">Viewer Profile Summary</h4>
+              <div class="summary-stats-grid">
+                <div class="stat-item">
+                  <span class="stat-key">User ID:</span>
+                  <span class="stat-val" id="res-user-id">—</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-key">Watch Time:</span>
+                  <span class="stat-val" id="res-watch-time">—</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-key">Average Session:</span>
+                  <span class="stat-val" id="res-session">—</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-key">Visits / Week:</span>
+                  <span class="stat-val" id="res-visits">—</span>
+                </div>
+                <div class="stat-item full-width">
+                  <span class="stat-key">Top Genres:</span>
+                  <span class="stat-val" id="res-genres">—</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Explainability: Why these recommendations? -->
+            <div class="explanation-box">
+              <h4 class="explanation-title">Why these recommendations?</h4>
+              <p class="explanation-text" id="res-explanation-text">
+                Recommendations are derived by aligning the viewer's explicit genre affinities with the behavioral patterns of the predicted audience segment, weighted by content popularity.
+              </p>
+            </div>
+
+            <!-- Recommendations List: Poster-style Cards -->
+            <div class="recommendations-section">
+              <h4 class="recommendations-title">Recommended For You</h4>
+              <div class="recommendations-grid" id="recommendations-container">
+                <!-- Injected movie cards -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View 2: Audience Segments Page -->
+    <div class="view-panel" id="view-segments" role="tabpanel" aria-labelledby="tab-segments" hidden>
+      <section class="segments-header-section">
+        <h2 class="view-title">Audience Segments Exploration</h2>
+        <p class="view-desc">Discovered behavioral clusters generated from training data using unsupervised KMeans. Statistics reflect actual cluster centroids and distributions.</p>
+      </section>
+
+      <div class="segments-meta-summary" id="segments-meta-summary">
+        <!-- Overview summary chips (Clusters count, silhouette score) -->
+      </div>
+
+      <div class="segments-grid" id="segments-cards-container">
+        <div class="loading-state">Loading audience segment metadata...</div>
+      </div>
+    </div>
+
+    <!-- View 3: System Status -->
+    <div class="view-panel" id="view-status" role="tabpanel" aria-labelledby="tab-status" hidden>
+      <section class="status-header-section">
+        <h2 class="view-title">Model &amp; System Telemetry</h2>
+        <p class="view-desc">Real-time status of the unsupervised machine learning pipeline, standardization layer, and API service health.</p>
+      </section>
+
+      <div class="status-cards-grid" id="status-grid-container">
+        <div class="status-card">
+          <span class="status-metric-title">Machine Learning Model</span>
+          <span class="status-metric-value" id="status-model-name">KMeans</span>
+          <span class="status-metric-desc">Unsupervised clustering (random_state=42)</span>
+        </div>
+        <div class="status-card">
+          <span class="status-metric-title">Feature Preprocessor</span>
+          <span class="status-metric-value" id="status-preprocessor">StandardScaler</span>
+          <span class="status-metric-desc">Standardized numerical and multi-hot genre features</span>
+        </div>
+        <div class="status-card">
+          <span class="status-metric-title">Discovered Clusters (K)</span>
+          <span class="status-metric-value" id="status-k-clusters">—</span>
+          <span class="status-metric-desc">Optimal K selected from candidate evaluation</span>
+        </div>
+        <div class="status-card">
+          <span class="status-metric-title">Measured Silhouette Score</span>
+          <span class="status-metric-value" id="status-silhouette">—</span>
+          <span class="status-metric-desc">Clustering separation metric</span>
+        </div>
+        <div class="status-card">
+          <span class="status-metric-title">Model Artifact Status</span>
+          <span class="status-metric-value" id="status-model-status">—</span>
+          <span class="status-metric-desc">Persisted pipeline availability</span>
+        </div>
+        <div class="status-card">
+          <span class="status-metric-title">HTTP API Status</span>
+          <span class="status-metric-value" id="status-api-status">Operational</span>
+          <span class="status-metric-desc">FastAPI serving /health and /recommend</span>
+        </div>
+      </div>
+
+      <!-- K Candidates Comparison Table -->
+      <section class="k-evaluation-section">
+        <h3 class="section-title">Candidate K Parameter Evaluation</h3>
+        <p class="section-desc">Evidence-based K evaluation tested across K=2 through K=6 during model training.</p>
+        <div class="table-responsive">
+          <table class="data-table" id="k-evaluation-table">
+            <thead>
+              <tr>
+                <th>Candidate K</th>
+                <th>Silhouette Score</th>
+                <th>Inertia</th>
+                <th>Selection Decision</th>
+              </tr>
+            </thead>
+            <tbody id="k-evaluation-tbody">
+              <tr><td colspan="4" class="text-center">Loading evaluation metrics...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal / Overlay for Privacy Policy & Terms -->
+  <div class="modal-backdrop hidden" id="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Document Title</h3>
+        <button type="button" class="modal-close-btn" id="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Injected text -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="modal-dismiss">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <span class="footer-brand">OTT Audience Intelligence &amp; Personalization Service</span>
+        <p class="footer-desc">Containerized engineering hackathon prototype demonstrating unsupervised KMeans clustering for audience segmentation and explainable recommendation.</p>
+      </div>
+      <div class="footer-col footer-links">
+        <a href="#privacy" id="link-privacy" class="footer-link">Privacy Policy</a>
+        <a href="#terms" id="link-terms" class="footer-link">Terms &amp; Conditions</a>
+      </div>
+    </div>
+    <div class="footer-sub">
+      <span>Operational prototype using synthetic development data. No external or paid AI services are invoked.</span>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

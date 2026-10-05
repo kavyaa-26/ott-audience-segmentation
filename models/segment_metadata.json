@@ -1,0 +1,124 @@
+{
+  "model_type": "KMeans",
+  "preprocessor": "StandardScaler",
+  "num_clusters": 6,
+  "silhouette_score": 0.3012,
+  "inertia": 3791.71,
+  "cluster_sizes": {
+    "0": 45,
+    "1": 168,
+    "2": 65,
+    "3": 118,
+    "4": 120,
+    "5": 84
+  },
+  "candidate_evaluations": [
+    {
+      "k": 2,
+      "silhouette": 0.2462,
+      "inertia": 6304.26
+    },
+    {
+      "k": 3,
+      "silhouette": 0.2594,
+      "inertia": 5336.89
+    },
+    {
+      "k": 4,
+      "silhouette": 0.2666,
+      "inertia": 4553.23
+    },
+    {
+      "k": 5,
+      "silhouette": 0.261,
+      "inertia": 4198.06
+    },
+    {
+      "k": 6,
+      "silhouette": 0.3012,
+      "inertia": 3791.71
+    }
+  ],
+  "clusters": [
+    {
+      "cluster_id": 0,
+      "segment_name": "Active Thriller & Mystery Viewers",
+      "cluster_size": 45,
+      "avg_watch_time": 29.98,
+      "avg_session_mins": 57.19,
+      "avg_visit_frequency": 20.93,
+      "dominant_genres": [
+        "Mystery",
+        "Drama",
+        "Family",
+        "Comedy"
+      ]
+    },
+    {
+      "cluster_id": 1,
+      "segment_name": "Moderate Drama & Romance Viewers",
+      "cluster_size": 168,
+      "avg_watch_time": 17.8,
+      "avg_session_mins": 49.7,
+      "avg_visit_frequency": 13.14,
+      "dominant_genres": [
+        "Drama",
+        "Romance",
+        "Animation",
+        "Comedy"
+      ]
+    },
+    {
+      "cluster_id": 2,
+      "segment_name": "Active Family & Comedy Viewers",
+      "cluster_size": 65,
+      "avg_watch_time": 30.23,
+      "avg_session_mins": 56.02,
+      "avg_visit_frequency": 21.68,
+      "dominant_genres": [
+        "Comedy",
+        "Sci-Fi",
+        "Action",
+        "Animation"
+      ]
+    },
+    {
+      "cluster_id": 3,
+      "segment_name": "Casual Short-Session Family & Comedy Viewers",
+      "cluster_size": 118,
+      "avg_watch_time": 5.02,
+      "avg_session_mins": 17.63,
+      "avg_visit_frequency": 4.09,
+      "dominant_genres": [
+        "Family",
+        "Comedy"
+      ]
+    },
+    {
+      "cluster_id": 4,
+      "segment_name": "High-Engagement Action Viewers",
+      "cluster_size": 120,
+      "avg_watch_time": 39.7,
+      "avg_session_mins": 99.61,
+      "avg_visit_frequency": 26.24,
+      "dominant_genres": [
+        "Action",
+        "Sci-Fi",
+        "Thriller"
+      ]
+    },
+    {
+      "cluster_id": 5,
+      "segment_name": "Casual Short-Session Animation & Family Viewers",
+      "cluster_size": 84,
+      "avg_watch_time": 4.79,
+      "avg_session_mins": 17.63,
+      "avg_visit_frequency": 4.21,
+      "dominant_genres": [
+        "Animation",
+        "Family",
+        "Comedy"
+      ]
+    }
+  ]
+}
